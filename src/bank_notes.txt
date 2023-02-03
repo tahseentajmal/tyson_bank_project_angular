@@ -1,0 +1,30 @@
+Life cycle of angular code ts
+================================
+methods work only when you call the methods but constructor and ngonit works without calling
+
+    constructor--> ngOnit--> other methods
+
+Data binding in angular (data sharing in components)
+====================================================
+
+html - view
+
+ts - component
+
+    1. One way binding 
+    ===================
+
+        1.1 Component to view data sharing
+        ----------------------------------
+
+            1.1.1) String Interpolation     {{variable}} (eg :- this is provided in <h2>{{data}}</h2>)
+
+            1.1.2) Property Binding         [property]="value" (eg :- [placeholder]="inputplaceholderdata")
+
+        
+        1.2 View to Component data sharing
+        ----------------------------------
+
+            1.2.1) Event Binding            (event)="method()" (eg :- (click)="login()")
+
+            1.2.2) $event Binding           (event)="method($event)" (used to run event and accept data)
