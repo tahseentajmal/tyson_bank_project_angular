@@ -1,16 +1,14 @@
-<p>login works!</p>
-
-<div class="container w-50 border border-white p-5 mt-2 text-white text-center rounded ">
+<div class="container w-50 border border-white p-5 mt-5 text-white text-center rounded ">
     <h1>Sign In</h1>
     <form action="" class="p-3">
         <div>
-            <input (change)="acnoChange($event)" name="accountno" id="accountno" type="text" class="form-control p-2 m-2" [placeholder]="inputplaceholder">
+            <input #acno  name="accountno" id="accountno" type="text" class="form-control p-2 m-2" [placeholder]="inputplaceholder">
         </div>
         <div>
-            <input (change)="passwordChange($event)" name="password" id="password" type="password" class="form-control p-2 m-2" placeholder="Enter Password">
+            <input #password  name="password" id="password" type="password" class="form-control p-2 m-2" placeholder="Enter Password">
         </div>
         <div>
-            <button type="button" (click)="login()" class="btn btn-outline-secondary p-2 m-2" >Submit</button>
+            <button type="button" (click)="login(acno,password)" class="btn btn-outline-secondary p-2 m-2" >Submit</button>
         </div>
     </form>
 </div>

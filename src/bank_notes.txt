@@ -28,3 +28,8 @@ ts - component
             1.2.1) Event Binding            (event)="method()" (eg :- (click)="login()")
 
             1.2.2) $event Binding           (event)="method($event)" (used to run event and accept data)
+
+            1.2.3) Event Binding with       #variable
+                    template rendering variable
+
+
