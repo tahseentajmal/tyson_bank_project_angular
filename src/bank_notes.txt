@@ -29,7 +29,20 @@ ts - component
 
             1.2.2) $event Binding           (event)="method($event)" (used to run event and accept data)
 
-            1.2.3) Event Binding with       #variable
+            1.2.3) Event Binding with               #variable
                     template rendering variable
+
+
+    1. Two way binding :-
+    ===================
+
+        2.1 ngModel Method :-   [(ngModel)]="property"  Used by importing --- FormsModule
+
+                                for using ngModel ensure unique name and id for input elements
+
+                                By using ngModel, you can keep your component's state in sync with the user's input without
+                                 having to manually handle updates to the input value or manually trigger updates to the
+                                  component's state. This can greatly simplify the process of building forms in Angular
+                                   and make it easier to manage their state.
 
 
