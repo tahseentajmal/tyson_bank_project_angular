@@ -1,0 +1,18 @@
+<div class="container w-50 border border-white p-5 mt-5  text-white text-center rounded ">
+    <h1>Sign Up</h1>
+    <form action="" (ngSubmit)="register()" class="p-3">
+        <div>
+            <input [(ngModel)]="username_reg"  name="username_reg" id="username_reg" type="text" class="form-control p-2 m-2 " placeholder="Enter Username">
+        </div>
+        <div>
+            <input [(ngModel)]="accountno_reg"  name="accountno_reg" id="accountno_reg" type="number" class="form-control p-2 m-2 " placeholder="Enter Account Number">
+        </div>
+        
+        <div>
+            <input [(ngModel)]="password_reg"  name="password_reg" id="password_reg" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+        </div>
+        <div>
+            <button type="submit"  class="btn btn-outline-success p-2 m-3 w-25" >Submit</button>
+        </div>
+    </form>
+</div>

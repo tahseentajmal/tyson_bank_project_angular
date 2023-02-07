@@ -1,1 +1,41 @@
-<p>dashboard works!</p>
+<h1 class="text-center">Welcome {{username}}</h1> 
+<div class="container p-2 mb-5">
+    <!--Component to view using string interpolation-->
+    <div class="container deposit border border-white border-3 p-4 m-2 text-white text-center rounded   " style="background-color: black;">
+        
+        <form action=""  class="p-1">
+            <h2 class="p-2 mb-4">Deposit.</h2>
+            <div>
+                <input [(ngModel)]="acno_d"  name="accountno_dep" id="accountno_dep" type="text" class="form-control p-2 m-2 " placeholder="Enter Account Number">
+            </div>
+            <div>
+                <input [(ngModel)]="pwd_d"  name="password_dep" id="password_dep" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+            </div>
+            <div>
+                <input [(ngModel)]="amt_d" name="amount_dep" id="amount_dep" type="number" class="form-control p-2 m-2 " placeholder="Enter Deposit Amount.">
+            </div>
+            <div>
+                <button (click)="deposit()" type="submit"  class="btn btn-outline-success p-2 mt-5 w-40" >Deposit</button>
+            </div>
+        </form>
+    </div>
+    <div class="container withdraw  border border-white border-3 p-4 m-2  text-white text-center rounded  " style="background-color: black;">
+        
+        <form action=""  class="p-1">
+            <h2 class="p-2 mb-4">Withdrawal.</h2>
+            <div>
+                <input [(ngModel)]="acno_w" name="accountno_wid" id="accountno_wid" type="text" class="form-control p-2 m-2 " placeholder="Enter Account Number">
+            </div>
+            <div>
+                <input [(ngModel)]="pwd_w"  name="password_wid" id="password_wid" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+            </div>
+            <div>
+                <input [(ngModel)]="amt_w" name="amount_wid" id="amount_wid" type="number" class="form-control p-2 m-2 " placeholder="Enter Deposit Amount.">
+            </div>
+            <div>
+                <button (click)="withdraw()" type="submit"  class="btn btn-outline-danger p-2 mt-5 w-40" >Withdraw</button>
+            </div>
+        </form>
+    </div>
+    
+</div>

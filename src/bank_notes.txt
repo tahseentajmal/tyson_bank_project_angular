@@ -46,3 +46,42 @@ ts - component
                                    and make it easier to manage their state.
 
 
+
+    Redirection in Angular :-
+    ==========================
+
+        Module - AppRoutingModule
+            Router  :-  A class used for Redirection in angular -!
+                Method - navigateByUrl
+
+
+    Dependency Injection :-
+    =======================
+    
+               - done to inherit methods and variable between classes
+
+                - It is done inside access specifiers
+
+                - Access Specifiers :- Private/Public (private can me used only within class injected)
+
+                - Reference/Object : ClassName
+
+                - reference.method()
+
+                - Router link in used instead of href
+
+
+    Angular Services :-
+    ===================
+
+        to store and read data and methods that are accessible throughout the angular application
+
+        - all components can access the data and methods in the service file easily.
+
+        -- ng generate service serviceName  -- ng g s serviceName
+
+
+
+
+
+
