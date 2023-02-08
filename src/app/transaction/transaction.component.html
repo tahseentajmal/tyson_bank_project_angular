@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class=" text-center p-3">Transaction History</h1>
+  <div class="container w-75 ">
+    <table class="table  ">
+        <thead class="table table-dark text-warning">
+          <tr>
+            <th scope="col">Transaction No.</th>
+            <th scope="col">Transaction Type</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <!-- <tbody class="table table-dark">
+          <tr>
+            <th scope="row">1</th>
+            <td>Credit</td>
+            <td>10000 Rs</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Debit</td>
+            <td>2000 Rs</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Credit</td>
+            <td>3000 Rs</td>
+          </tr>
+        </tbody> -->
+        <tbody class="table table-dark" *ngFor="let i of transaction_data;index as n">
+          <tr>
+            <th>{{n+1}}</th>
+            <td>{{i.type}}</td>
+            <td>{{i.tr_amount}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

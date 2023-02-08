@@ -8,11 +8,12 @@ export class DataService {
   constructor() { }
 
   user:any
+  current_acno:any
   userdetails: any = {
-    1000: { acno: 1000, username: "anu", password: "abc123", balance: 10000 },
-    1001: { acno: 1001, username: "manu", password: "abc123", balance: 20000 },
-    1002: { acno: 1002, username: "tanu", password: "abc123", balance: 30000 },
-    1003: { acno: 1003, username: "fanu", password: "abc123", balance: 40000 },
+    1000: { acno: 1000, username: "anu", password: "abc123", balance: 10000 ,transaction:[] },
+    1001: { acno: 1001, username: "manu", password: "abc123", balance: 20000,transaction:[] },
+    1002: { acno: 1002, username: "tanu", password: "abc123", balance: 30000,transaction:[] },
+    1003: { acno: 1003, username: "fanu", password: "abc123", balance: 40000,transaction:[] },
 
   }
   register(acno:any,username:any,password:any){
@@ -31,7 +32,8 @@ export class DataService {
     var userdetails = this.userdetails
     if (acno in userdetails) {
       if (password === userdetails[acno]["password"]) {
-        this.user=userdetails[acno]["username"] // Variable for storing username of logged inn used
+        this.user=userdetails[acno]["username"] // Variable for storing username of logged inn user
+        this.current_acno=acno //
         console.log(this.user);
         
         return true
@@ -51,6 +53,8 @@ export class DataService {
       if(password === userDetails[acno]["password"]){
         // Update balance
         userDetails[acno]["balance"]+=amount
+        // Store transaction data
+        userDetails[acno]["transaction"].push({type:"CREDIT",tr_amount:amount})
         // Console Updated data
         console.log(userDetails);
         // Return Balance
@@ -74,6 +78,8 @@ export class DataService {
         if(amount<=userDetails[acno]["balance"]){
           // Update Balance
           userDetails[acno]["balance"]-=amount
+          // Store transaction data
+          userDetails[acno]["transaction"].push({type:"DEBIT",tr_amount:amount})
           // Console Updated data
           console.log(userDetails);
           // Return Balance
@@ -94,5 +100,9 @@ export class DataService {
       alert("Incorrect AccountNo")
       return false
     }
+  }
+
+  getTransaction(acno:any){
+    return this.userdetails[acno]["transaction"]
   }
 }

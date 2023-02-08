@@ -81,6 +81,35 @@ ts - component
         -- ng generate service serviceName  -- ng g s serviceName
 
 
+    Angular Directives :-  Used to manipulate DOM in Angular
+    ======================
+
+            1) Component Directives :- 
+
+            2) Structural Directives :-  *ngFor *ngIf
+
+
+        Angular directives are custom HTML elements or attributes that provide new functionality to a web page or
+         application. They allow Angular to manipulate the DOM by changing the behavior, appearance or layout of 
+         an element. Directives are used to add dynamic behavior to templates, such as creating reusable components,
+          binding values, hiding or showing elements, etc. There are three types of directives in Angular: Component
+           Directives, Structural Directives, and Attribute Directives.
+
+           1)Component Directives: Component Directives are the most commonly used directives in Angular. They are 
+                                    essentially custom HTML elements that encapsulate both the template and logic for
+                                     a view. They are defined with the @Component decorator and use a template to define 
+                                     the view.
+
+           2)Structural Directives: Structural Directives are used to manipulate the DOM layout by adding or removing 
+                                    elements. They are identified by an asterisk (*) in front of the directive name. Examples
+                                     of structural directives are ngFor and ngIf.
+
+           3)Attribute Directives: Attribute Directives are used to change the appearance or behavior of an existing
+                                     element. They are applied as HTML attributes to elements. Examples of attribute 
+                                     directives are ngStyle and ngClass.
+
+
+
 
 
 
