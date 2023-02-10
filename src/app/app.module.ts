@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,9 +18,10 @@ import { TransactionComponent } from './transaction/transaction.component';
     TransactionComponent,
   ],
   imports: [
-    BrowserModule, // For working with DOM on browser
-    AppRoutingModule, // Used for app routing (multiple page app)
-    FormsModule // Used for two way binding
+    BrowserModule,         // For working with DOM on browser
+    AppRoutingModule,      // Used for app routing (multiple page app)
+    FormsModule,           // Used for two way binding ngmodel , ngsubmit
+    ReactiveFormsModule    // Used for reactive forms
   ],
   providers: [],
   bootstrap: [AppComponent]

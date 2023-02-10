@@ -4,19 +4,28 @@
     <div class="container deposit border border-white border-3 p-4 m-2 text-white text-center rounded   "
         style="background-color: black;">
 
-        <form action="" class="p-1">
+        <form [formGroup]="depositForm" class="p-1">
             <h2 class="p-2 mb-4">Deposit.</h2>
             <div>
-                <input [(ngModel)]="acno_d" name="accountno_dep" id="accountno_dep" type="text"
+                <input formControlName="acno_d" name="accountno_dep" id="accountno_dep" type="text"
                     class="form-control p-2 m-2 " placeholder="Enter Account Number">
             </div>
-            <div>
-                <input [(ngModel)]="pwd_d" name="password_dep" id="password_dep" type="password"
-                    class="form-control p-2 m-2 " placeholder="Enter Password">
+            <div class="text-danger text-left" *ngIf="this.depositForm.get('acno_d')?.errors  && this.depositForm.get('acno_d')?.touched">
+                <p>Invalid Input</p>
             </div>
             <div>
-                <input [(ngModel)]="amt_d" name="amount_dep" id="amount_dep" type="number" class="form-control p-2 m-2 "
+                <input formControlName="pwd_d" name="password_dep" id="password_dep" type="password"
+                    class="form-control p-2 m-2 " placeholder="Enter Password">
+            </div>
+            <div class="text-danger text-left" *ngIf="this.depositForm.get('pwd_d')?.errors  && this.depositForm.get('pwd_d')?.touched">
+                <p>Invalid Input</p>
+            </div>
+            <div>
+                <input formControlName="amt_d" name="amount_dep" id="amount_dep" type="number" class="form-control p-2 m-2 "
                     placeholder="Enter Deposit Amount.">
+            </div>
+            <div class="text-danger text-left" *ngIf="this.depositForm.get('amt_d')?.errors  && this.depositForm.get('amt_d')?.touched">
+                <p>Invalid Input</p>
             </div>
             <div>
                 <button (click)="deposit()" type="submit" class="btn btn-outline-success p-2 mt-5 w-40">Deposit</button>
@@ -26,19 +35,28 @@
     <div class="container withdraw  border border-white border-3 p-4 m-2  text-white text-center rounded  "
         style="background-color: black;">
 
-        <form action="" class="p-1">
+        <form [formGroup]="withdrawalForm" action="" class="p-1">
             <h2 class="p-2 mb-4">Withdrawal.</h2>
             <div>
-                <input [(ngModel)]="acno_w" name="accountno_wid" id="accountno_wid" type="text"
+                <input formControlName="acno_w" name="accountno_wid" id="accountno_wid" type="text"
                     class="form-control p-2 m-2 " placeholder="Enter Account Number">
             </div>
-            <div>
-                <input [(ngModel)]="pwd_w" name="password_wid" id="password_wid" type="password"
-                    class="form-control p-2 m-2 " placeholder="Enter Password">
+            <div class="text-danger text-left" *ngIf="this.withdrawalForm.get('acno_w')?.errors && this.withdrawalForm.get('acno_w')?.touched">
+                <p>Invalid Input</p>
             </div>
             <div>
-                <input [(ngModel)]="amt_w" name="amount_wid" id="amount_wid" type="number" class="form-control p-2 m-2 "
+                <input formControlName="pwd_w" name="password_wid" id="password_wid" type="password"
+                    class="form-control p-2 m-2 " placeholder="Enter Password">
+            </div>
+            <div class="text-danger text-left" *ngIf="this.withdrawalForm.get('pwd_w')?.errors && this.withdrawalForm.get('pwd_w')?.touched">
+                <p>Invalid Input</p>
+            </div>
+            <div>
+                <input formControlName="amt_w" name="amount_wid" id="amount_wid" type="number" class="form-control p-2 m-2 "
                     placeholder="Enter Deposit Amount.">
+            </div>
+            <div class="text-danger text-left" *ngIf="this.withdrawalForm.get('amt_w')?.errors && this.withdrawalForm.get('amt_w')?.touched">
+                <p>Invalid Input</p>
             </div>
             <div>
                 <button (click)="withdraw()" type="submit"

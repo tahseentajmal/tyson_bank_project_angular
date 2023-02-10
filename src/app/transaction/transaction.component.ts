@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class TransactionComponent implements OnInit {
     console.log(this.transaction_data);
     
   }
+
   ngOnInit(): void {
 
   }

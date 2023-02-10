@@ -110,7 +110,55 @@ ts - component
 
 
 
+Validation in Angular :-
+========================
+
+form creation in angular
+
+            1. Template Driven Form 
+
+            2. Model Driven Form :-
+
+                    2.1.Reactive Form :-
+                    --------------------    - Used to create model of a form
+
+                                            - reactiveFormsModule  : Module
+                                                -FormBuiler        : Class
+                                                  -group()         : Method   (MCM)
+
+                                            - group,,array,control (GAC) are present in reactiveform
 
 
+                            Steps:-
+                            -------
+
+                                1) Creater reactive Form for Register
+
+                                        registerForm=this.fb.group({
+
+                                            username_reg:[""],
+                                            accountno_reg:[""],
+                                            password_reg:[""]
+
+
+                                        })
+
+                                2) Bind [formGroup]="registerForm" on form html tag 
+
+                                3) Access data in component.ts method as
+
+                                    var acno = this.registerForm.value.accountno_reg
+                                    var uname = this.registerForm.value.username_reg
+                                    var pwd = this.registerForm.value.password_reg
+
+
+Validation Working Pattern:-
+---------------------------
+                FormBuiler dependency Injection 
+                -> Model Form created (using group)
+                -> Apply Form form to html ([formGroup]
+                -> formControl name) -> loginForm.value in function 
+                -> apply validation rule from Validators class .required and .pattern method  ('[0-9a-zA-z]+')
+                -> if(this.loginForm.valid) returns true Form Validation Success
 
 

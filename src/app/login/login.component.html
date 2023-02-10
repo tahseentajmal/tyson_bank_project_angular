@@ -1,14 +1,23 @@
 <div class="container w-50 border border-white p-5 mt-5  text-white text-center rounded ">
     <h1>Sign In</h1>
-    <form action="" (ngSubmit)="login()" class="p-3">
+    <form [formGroup]="loginForm" action=""  class="p-3">
         <div>
-            <input [(ngModel)]="acno"  name="accountno" id="accountno" type="text" class="form-control p-2 m-2 " [placeholder]="inputplaceholder">
+            <input formControlName="acno" name="accountno" id="accountno" type="text" class="form-control p-2 m-2 " [placeholder]="inputplaceholder">
+            
         </div>
-        <div>
-            <input [(ngModel)]="password"  name="password" id="password" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+        <div class="text-danger text-left" *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched">
+            <p>Invalid Input</p>
         </div>
+        
         <div>
-            <button type="submit"  class="btn btn-outline-warning p-2 m-2 w-25" >Submit</button>
+            <input formControlName="pwd"  name="password" id="password" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+        </div>
+        <div class="text-danger text-left" *ngIf="this.loginForm.get('pwd')?.errors && this.loginForm.get('pwd')?.touched">
+            <p>Invalid Input</p>
+        </div>
+
+        <div>
+            <button type="submit" (click)="login()"  class="btn btn-outline-warning p-2 m-2 w-25" >Submit</button>
         </div>
         <div class="p-3">
             New User ? <a style="text-decoration:none; color:gold ;" routerLink="register"><b>Register Here.</b></a>

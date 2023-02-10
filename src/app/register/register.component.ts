@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -9,36 +10,49 @@ import { DataService } from '../services/data.service';
 })
 export class RegisterComponent {
 
-  constructor(private ds: DataService,private router: Router) { }
+  constructor(private ds: DataService, private router: Router, private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  username_reg:any
-  accountno_reg:any
-  password_reg:any
+
+  // Creater reactive Form for Register
+  registerForm = this.fb.group({
+
+    username_reg: ['', [Validators.required, Validators.pattern('[a-zA-z]+')]],
+    accountno_reg: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+    password_reg: ['', [Validators.required, Validators.pattern('[0-9a-zA-Z]+')]]
+
+
+  })
+
 
   register() {
 
     // alert("Registration Success")
     // let userDetails = this.ds.userdetails
-    var acno = this.accountno_reg
-    var uname = this.username_reg
-    var pwd = this.password_reg
+    var acno = this.registerForm.value.accountno_reg
+    var uname = this.registerForm.value.username_reg
+    var pwd = this.registerForm.value.password_reg
 
-    // console.log(uname,acno,pwd)
-    const result=this.ds.register(acno,uname,pwd) // Called register method from data service module
+    if (this.registerForm.valid) {
 
-    if(result){
-      alert(`${uname} has successfully registered`)
-      this.router.navigateByUrl("")  // Called navigateByUrl method from router Module
+      // console.log(uname,acno,pwd)
+      const result = this.ds.register(acno, uname, pwd) // Called register method from data service module
 
+
+      if (result) {
+        alert(`${uname} has successfully registered`)
+
+        this.router.navigateByUrl("")  // Called navigateByUrl method from router Module
+
+      }
+      else {
+        alert("User already exists, Login to Continue")
+
+      }
     }
-    else{
-      alert("User already exists, Login to Continue")
-      
+    else {
+      alert("Invalid Form")
     }
-
-
-
   }
 }

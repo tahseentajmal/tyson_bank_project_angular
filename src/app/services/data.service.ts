@@ -86,18 +86,15 @@ export class DataService {
           return userDetails[acno]["balance"]
         }
         else{
-          alert("Insufficient Balance")
           return false
         }
 
       }
       else{
-        alert("Incorrect Password")
         return false
       }
     }
     else{
-      alert("Incorrect AccountNo")
       return false
     }
   }
