@@ -8,8 +8,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},      // http://localhost:4200/dashboard
   {path:"",component:LoginComponent},                   // http://localhost:4200/
-  {path:"register",component:RegisterComponent},        // htpps://localhost:4200/register 
-  {path:"transaction",component:TransactionComponent}   // htpps://localhost:4200/transaction
+  {path:"register",component:RegisterComponent},        // http://localhost:4200/register 
+  {path:"transaction",component:TransactionComponent}   // http://localhost:4200/transaction
 ];
 
 @NgModule({

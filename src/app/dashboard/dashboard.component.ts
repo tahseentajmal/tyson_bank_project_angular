@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -7,11 +8,14 @@ import { DataService } from '../services/data.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  ngOnInit(): void { }
+  
 
   username: any
+  acno: any;
+  
+
 
   // // Variables for deposit
   // acno_d: any
@@ -24,9 +28,16 @@ export class DashboardComponent {
   // amt_w: any
 
 
-  constructor(private ds: DataService, private fb: FormBuilder) {
+  constructor(private ds: DataService, private fb: FormBuilder,private rt:Router) {
     this.username = this.ds.user
   }
+
+  ngOnInit(): void {
+    if(!localStorage.getItem("currentAcno")){
+      alert("Please Login to continue")
+      this.rt.navigateByUrl("")
+    }
+   }
 
   depositForm = this.fb.group({
     acno_d: ['', [Validators.required, Validators.pattern('[0-9]+')]],
@@ -45,7 +56,7 @@ export class DashboardComponent {
   deposit() {
     var accountno = this.depositForm.value.acno_d
     var password = this.depositForm.value.pwd_d
-    var amount = this.depositForm.value.acno_d
+    var amount = this.depositForm.value.amt_d
     const result = this.ds.deposit(accountno, password, amount)
 
     if (this.depositForm.valid) {
@@ -65,7 +76,7 @@ export class DashboardComponent {
   withdraw() {
     var accountno = this.withdrawalForm.value.acno_w
     var password = this.withdrawalForm.value.pwd_w
-    var amount = this.withdrawalForm.value.acno_w
+    var amount = this.withdrawalForm.value.amt_w
     const result = this.ds.withdraw(accountno, password, amount)
     if (this.withdrawalForm.valid) {
       if (result) {
@@ -78,5 +89,19 @@ export class DashboardComponent {
     else{
       alert("Invalid Format")
     }
+  }
+  logOut(){
+    window.localStorage.removeItem("currentUser")
+    window.localStorage.removeItem("currentAcno")
+    this.rt.navigateByUrl("")
+  }
+
+  deleteParent(){
+    this.acno=JSON.parse(localStorage.getItem("currentAcno")||'')
+    this.username=JSON.parse(localStorage.getItem("currentUser")||'')
+  }
+
+  cancel(){
+    this.acno="" // Removes the value of this.acno which causes ngif to fail
   }
 }

@@ -3,3 +3,7 @@ body{
     background-image: url(C:\Users\tahse\OneDrive\Desktop\Luminar\angularProjects\sample\src\assets\tb_bg.png);
     background-size:cover;
 }
+
+.style{
+    opacity: 0;
+}

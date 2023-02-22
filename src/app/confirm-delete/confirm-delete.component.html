@@ -1,0 +1,10 @@
+
+
+<div *ngIf="account" class="mt-5 p-3 container w-50 border border-white border-3 rounded text-center text-white">
+    <h1>Delete Account</h1>
+    <h4>Are you sure you want to delete {{account}} ?</h4>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-success m-2 w-25">Yes</button>
+        <button (click)="onCancel()" class="btn btn-outline-danger m-2 w-25">No</button>
+    </div>
+</div>

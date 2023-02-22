@@ -102,11 +102,13 @@ ts - component
 
            2)Structural Directives: Structural Directives are used to manipulate the DOM layout by adding or removing 
                                     elements. They are identified by an asterisk (*) in front of the directive name. Examples
-                                     of structural directives are ngFor and ngIf.
+                                     of structural directives are *ngFor and *ngIf.
 
            3)Attribute Directives: Attribute Directives are used to change the appearance or behavior of an existing
                                      element. They are applied as HTML attributes to elements. Examples of attribute 
-                                     directives are ngStyle and ngClass.
+                                     directives are [ngStyle] and [ngClass]. 
+
+                                     component,structural,attribute(csa)
 
 
 
@@ -160,5 +162,57 @@ Validation Working Pattern:-
                 -> formControl name) -> loginForm.value in function 
                 -> apply validation rule from Validators class .required and .pattern method  ('[0-9a-zA-z]+')
                 -> if(this.loginForm.valid) returns true Form Validation Success
+
+
+Local Storage in Angular :-
+=============================
+
+                - localStorage.getItem()
+                - localStorage.setItem()
+                - localStorage.getItem()
+
+            ts-json (stringify)
+            json-ts (parse)
+
+Parent Child Component Communication :-
+=======================================
+
+        @Input() : decorator is used to expose a property of a child
+                     component to its parent component, allowing the parent 
+                     component to pass data to the child component.
+
+        @Output() : decorator is used to define an event emitter in a child
+                     component that can emit events to its parent component,
+                      allowing the child component to trigger events that the 
+                      parent component can respond to.
+
+
+                Syntax:
+                -------
+                         @Input() propertyName: String|undefined;
+                         @Output() propertyName: propertyType;
+
+    
+    Event Creation in Angular
+    =========================
+
+                        We can create our own events in Angular using event Creation
+
+                    Using EventEmitter - Class used to create user defined events.
+
+
+                            eventname = new EventEmitter()
+
+                            emit() - for calling event emitter , to define when to start the event
+                                    
+                                    - this.eventname.emit() where eventname is an object of EventEmitter class
+
+
+Date and Time in Angular :-
+===========================
+
+        class - Date
+
+
 
 

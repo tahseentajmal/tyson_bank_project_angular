@@ -12,7 +12,6 @@ export class LoginComponent {
 
   data = "You perfect banking partner"
   inputplaceholder = "Enter Account Number"
- 
 
 
   constructor(private router:Router,private ds:DataService,private fb:FormBuilder) {
