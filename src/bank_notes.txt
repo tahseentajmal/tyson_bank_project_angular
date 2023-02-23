@@ -214,5 +214,11 @@ Date and Time in Angular :-
         class - Date
 
 
+Angular Pipes
+=============
+
+            to convert data into another Formatgbg  g
+
+
 
 

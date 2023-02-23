@@ -1,9 +1,10 @@
 
 
-<div  class="p-3 m-3 mb-5">
+<div  class="p-2 m-3 mb-5">
     <h1 class="text-center">Welcome {{username}}</h1>
+    <p class="text-center text-warning ">{{dateDetails | date : 'medium'}}</p>
     <app-confirm-delete (oncancel)="cancel()" [account]="acno" ></app-confirm-delete> <!-- Selector for Parent Child Data Transfer-->
-    <div [ngClass]=" acno?'style':'' " class="container ">
+    <div [ngClass]=" acno?'style':'' " class="container p-3 ">
         <!--Component to view using string interpolation-->
         <div class="container deposit border border-white border-3 p-4 m-2 text-white text-center rounded   "
             style="background-color: black;">
@@ -71,9 +72,12 @@
     </div>
     <div class="routerlinks container">
         <!--router link /component is used to navigate from one link to another-->
-        <a routerLink="/transaction" class="text-center btn btn-outline-primary d-flex justify-content-center  mb-2 p-1 w-25">Transaction History</a>
+        <a routerLink="/transaction" class="text-center btn btn-outline-success d-flex justify-content-center  mb-2 p-1 w-25">Transaction History</a>
         <a  (click)="logOut()" class="text-center btn btn-warning d-flex justify-content-center  mb-2 p-1 w-25">Log Out</a>
         <a (click)="deleteParent()"  class="text-center btn btn-outline-danger d-flex justify-content-center  mb-2 p-1 w-25">Delete Account</a>
     </div >
 </div>
+
+<!--This is the dashboard component of our angular application here the features included are withdrawal form deposit form transaction history delete account option and a logout option styling
+is derived from the main stylesheet router link is used to navigate from one link to another withdrawal format is invalid-->
 

@@ -14,10 +14,10 @@ export class DashboardComponent implements OnInit {
 
   username: any
   acno: any;
-  
+  dateDetails: any
 
 
-  // // Variables for deposit
+  // // Variables for deposit (no longer used in component)
   // acno_d: any
   // pwd_d: any
   // amt_d: any
@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ds: DataService, private fb: FormBuilder,private rt:Router) {
     this.username = this.ds.user
+    this.dateDetails = new Date() // This create a new date variable which can be formatted using angular date pipe
   }
 
   ngOnInit(): void {
