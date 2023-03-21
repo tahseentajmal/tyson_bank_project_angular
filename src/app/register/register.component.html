@@ -1,27 +1,33 @@
 <div class="container w-50 border border-white p-5 mt-5  text-white text-center rounded ">
     <h1>Sign Up</h1>
-    <form [formGroup]="registerForm" action=""  class="p-3">
+    <form [formGroup]="registerForm" action="" class="p-3">
         <div>
-            <input formControlName="username_reg" name="username_reg" id="username_reg" type="text" class="form-control p-2 m-2 " placeholder="Enter Username">
+            <input formControlName="username_reg" name="username_reg" id="username_reg" type="text"
+                class="form-control p-2 m-2 " placeholder="Enter Username">
         </div>
-        <div class="text-danger text-left" *ngIf="this.registerForm.get('username_reg')?.errors && this.registerForm.get('username_reg')?.touched">
+        <div class="text-danger text-left"
+            *ngIf="this.registerForm.get('username_reg')?.errors && this.registerForm.get('username_reg')?.touched">
             <p>Invalid Input</p>
         </div>
         <div>
-            <input formControlName="accountno_reg"  name="accountno_reg" id="accountno_reg" type="number" class="form-control p-2 m-2 " placeholder="Enter Account Number">
+            <input formControlName="accountno_reg" name="accountno_reg" id="accountno_reg" type="number"
+                class="form-control p-2 m-2 " placeholder="Enter Account Number">
         </div>
-        <div class="text-danger text-left" *ngIf="this.registerForm.get('accountno_reg')?.errors && this.registerForm.get('accountno_reg')?.touched">
+        <div class="text-danger text-left"
+            *ngIf="this.registerForm.get('accountno_reg')?.errors && this.registerForm.get('accountno_reg')?.touched">
             <p>Invalid Input</p>
         </div>
-        
+
         <div>
-            <input formControlName="password_reg"  name="password_reg" id="password_reg" type="password" class="form-control p-2 m-2 " placeholder="Enter Password">
+            <input formControlName="password_reg" name="password_reg" id="password_reg" type="password"
+                class="form-control p-2 m-2 " placeholder="Enter Password">
         </div>
-        <div class="text-danger text-left" *ngIf="this.registerForm.get('password_reg')?.errors && this.registerForm.get('password_reg')?.touched">
+        <div class="text-danger text-left"
+            *ngIf="this.registerForm.get('password_reg')?.errors && this.registerForm.get('password_reg')?.touched">
             <p>Invalid Input</p>
         </div>
         <div>
-            <button type="submit" (click)="register()" class="btn btn-outline-success p-2 m-3 w-25" >Submit</button>
+            <button type="submit" (click)="register()" class="btn btn-outline-success p-2 m-3 w-25">Submit</button>
         </div>
     </form>
 </div>

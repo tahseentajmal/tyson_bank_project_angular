@@ -1,54 +1,74 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+// Overloading Headers Globally
+const option = {
+  headers: new HttpHeaders()
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class DataService {
 
-  constructor() { 
-    this.getData()
+  user: any
+  current_acno: any
+  userdetails: any
+
+  constructor(private http: HttpClient) { // dependency injection for httpclientmodule
+
   }
 
-  user:any
-  current_acno:any
-  // userdetails:any
-  userdetails: any = {
-    // 1000: { acno: 1000, username: "anu", password: "abc123", balance: 10000 ,transaction:[] },
-    // 1001: { acno: 1001, username: "manu", password: "abc123", balance: 20000,transaction:[] },
-    // 1002: { acno: 1002, username: "tanu", password: "abc123", balance: 30000,transaction:[] },
-    // 1003: { acno: 1003, username: "fanu", password: "abc123", balance: 40000,transaction:[] },
 
-   }
-  saveData(){
-    if(this.userdetails){
-      localStorage.setItem("database",JSON.stringify(this.userdetails))
+  saveData() {
+    if (this.userdetails) {
+      localStorage.setItem("database", JSON.stringify(this.userdetails))
     }
-    if(this.current_acno){
-      localStorage.setItem("currentAcno",JSON.stringify(this.current_acno))
+    if (this.current_acno) {
+      localStorage.setItem("currentAcno", JSON.stringify(this.current_acno))
     }
-    if(this.user){
-      localStorage.setItem("currentUser",this.user)
-    }
-  }
-  getData(){
-    if(localStorage.getItem("database")){
-      this.userdetails=JSON.parse(localStorage.getItem('database') || "")
-    }
-    if(localStorage.getItem("currentAcno")){
-      this.current_acno=JSON.parse(localStorage.getItem('currentAcno') || '')
-    }
-    if(localStorage.getItem("currentUser")){
-      this.user=localStorage.getItem('currentUser')
+    if (this.user) {
+      localStorage.setItem("currentUser", this.user)
     }
   }
-  removeData(){
-    if(localStorage.getItem("database")){
+  // getData(){ method used to get data from ls
+  //   if(localStorage.getItem("database")){
+  //     this.userdetails=JSON.parse(localStorage.getItem('database') || "")
+  //   }
+  //   if(localStorage.getItem("currentAcno")){
+  //     this.current_acno=JSON.parse(localStorage.getItem('currentAcno') || '')
+  //   }
+  //   if(localStorage.getItem("currentUser")){
+  //     this.user=localStorage.getItem('currentUser')
+  //   }
+  // }
+
+  getToken() {  // Token Accessing Method
+    // access token 
+    const token = JSON.parse(localStorage.getItem("token") || "")
+
+    // generate header
+    let headers = new HttpHeaders()
+
+    if (token) {
+      // append token to the header (Overloading)
+      option.headers = headers.append("access_token", token)
+    }
+    return option
+
+  }
+
+  removeData() {
+    if (localStorage.getItem("database")) {
       localStorage.removeItem('database')
     }
-    if(localStorage.getItem("currentAcno")){
+    if (localStorage.getItem("currentAcno")) {
       localStorage.removeItem('currentAcno')
     }
-    if(localStorage.getItem("currentUser")){
+    if (localStorage.getItem("currentUser")) {
       localStorage.removeItem('database')
     }
   }
@@ -56,95 +76,34 @@ export class DataService {
 
 
 
-  register(acno:any,username:any,password:any){
-    if(acno in this.userdetails){
-      return false
-    }
-    else{
-      this.userdetails[acno]={acno,username,password,balance:0,transaction: []}
-      console.log(this.userdetails);
-      this.saveData()
-      return true
-    }
+  register(acno: any, username: any, password: any) {
+    // Create Http Body Data
+    const data = { acno, username, password }
+    return this.http.post("http://localhost:3001/register", data)
   }
 
-  login(acno:any,password:any){
-    var userdetails = this.userdetails
-    if (acno in userdetails) {
-      if (password === userdetails[acno]["password"]) {
-        this.user=userdetails[acno]["username"] // Variable for storing username of logged inn user
-        this.current_acno=acno //
-        console.log(this.user);
-        this.saveData()
-        return true
-      }
-      else {
-        return false
-      }
-    }
-    else {
-      return false
-    }
+  login(acno: any, password: any) {
+    const data = { acno, password }
+    return this.http.post("http://localhost:3001/login", data)
   }
 
-  deposit(acno:any,password:any,amount:any){
-    const userDetails=this.userdetails
-    if(acno in userDetails){
-      if(password === userDetails[acno]["password"]){
-        // Update balance
-        userDetails[acno]["balance"]+=amount
-        // Store transaction data
-        userDetails[acno]["transaction"].push({type:"CREDIT",tr_amount:amount})
-        // Console Updated data
-        console.log(userDetails);
-        // Save data in Local Storage
-        this.saveData()
-        // Return Balance
-        return userDetails[acno]["balance"]
-      }
-      else{
-        return false
-      }
-    }
-    else{
-      return false
-    }
-  }
-  withdraw(acno:any,password:any,amount:any){
-    let userDetails=this.userdetails
-
-    if(acno in userDetails){
-
-      if(password === userDetails[acno]["password"]){
-
-        if(amount<=userDetails[acno]["balance"]){
-          // Update Balance
-          userDetails[acno]["balance"]-=amount
-          // Store transaction data
-          userDetails[acno]["transaction"].push({type:"DEBIT",tr_amount:amount})
-          // Console Updated data
-          console.log(userDetails);
-          // Save data in Local Storage
-          this.saveData()
-          // Return Balance
-          return userDetails[acno]["balance"]
-        }
-        else{
-          return false
-        }
-
-      }
-      else{
-        return false
-      }
-    }
-    else{
-      return false
-    }
+  deposit(acno: any, password: any, amount: any) {
+    const data = { acno, password, amount }
+    return this.http.post("http://localhost:3001/deposit", data, this.getToken())
   }
 
-  getTransaction(acno:any){
-    return this.userdetails[acno]["transaction"]
+  withdraw(acno: any, password: any, amount: any) {
+    const data = { acno, password, amount }
+    return this.http.post("http://localhost:3001/withdraw", data, this.getToken())
   }
 
+  getTransaction(acno: any) {
+    const data = { acno }
+    return this.http.post("http://localhost:3001/getTransaction", data, this.getToken())
+  }
+
+  deleteacc(acno:any){
+    return this.http.delete(`http://localhost:3001/delete/`+acno,this.getToken())
+  }
+  
 }

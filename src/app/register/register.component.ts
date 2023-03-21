@@ -36,20 +36,16 @@ export class RegisterComponent {
 
     if (this.registerForm.valid) {
 
-      // console.log(uname,acno,pwd)
-      const result = this.ds.register(acno, uname, pwd) // Called register method from data service module
-
-
-      if (result) {
-        alert(`${uname} has successfully registered`)
-
-        this.router.navigateByUrl("")  // Called navigateByUrl method from router Module
-
-      }
-      else {
-        alert("User already exists, Login to Continue")
-
-      }
+      // Called register method from data service module
+      this.ds.register(acno, uname, pwd).subscribe((result: any) => {
+        alert(result.message)
+        this.router.navigateByUrl("")
+      },
+        result => {
+          alert(result.error.message)
+          this.router.navigateByUrl("")
+        }
+      )
     }
     else {
       alert("Invalid Form")

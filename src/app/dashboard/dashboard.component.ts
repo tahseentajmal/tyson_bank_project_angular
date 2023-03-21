@@ -10,7 +10,7 @@ import { DataService } from '../services/data.service';
 })
 export class DashboardComponent implements OnInit {
 
-  
+
 
   username: any
   acno: any;
@@ -28,17 +28,19 @@ export class DashboardComponent implements OnInit {
   // amt_w: any
 
 
-  constructor(private ds: DataService, private fb: FormBuilder,private rt:Router) {
-    this.username = this.ds.user
+  constructor(private ds: DataService, private fb: FormBuilder, private rt: Router) {
+    if (localStorage.getItem("currentUser")) {
+      this.username = JSON.parse(localStorage.getItem("currentUser") || "")
+    }
     this.dateDetails = new Date() // This create a new date variable which can be formatted using angular date pipe
   }
 
   ngOnInit(): void {
-    if(!localStorage.getItem("currentAcno")){
+    if(!localStorage.getItem("token")){
       alert("Please Login to continue")
       this.rt.navigateByUrl("")
     }
-   }
+  }
 
   depositForm = this.fb.group({
     acno_d: ['', [Validators.required, Validators.pattern('[0-9]+')]],
@@ -55,54 +57,70 @@ export class DashboardComponent implements OnInit {
   // Functions for dashboard
 
   deposit() {
-    var accountno = this.depositForm.value.acno_d
+    var acno = this.depositForm.value.acno_d
     var password = this.depositForm.value.pwd_d
     var amount = this.depositForm.value.amt_d
-    const result = this.ds.deposit(accountno, password, amount)
+    const result = this.ds.deposit(acno, password, amount)
 
     if (this.depositForm.valid) {
-      if (result) {
-        alert(`Your account has been credited with ${amount} and balance is ${result}`)
-      }
-      else {
-        alert("Transaction Declined")
-      }
+      this.ds.deposit(acno, password, amount).subscribe((result: any) => {
+        alert(result.message)
+      },
+        result => {
+          alert(result.error.message)
+        }
+      )
     }
-    else{
+    else {
       alert("Invalid Format")
     }
 
   }
 
   withdraw() {
-    var accountno = this.withdrawalForm.value.acno_w
+    var acno = this.withdrawalForm.value.acno_w
     var password = this.withdrawalForm.value.pwd_w
     var amount = this.withdrawalForm.value.amt_w
-    const result = this.ds.withdraw(accountno, password, amount)
+
     if (this.withdrawalForm.valid) {
-      if (result) {
-        alert(`Your account has been debited with ${amount} and balance is ${result}`)
-      }
-      else {
-        alert("Transaction Declined")
-      }
+      this.ds.withdraw(acno, password, amount).subscribe((result: any) => {
+        alert(result.message)
+      },
+        result => {
+          alert(result.error.message)
+        }
+      )
     }
-    else{
+    else {
       alert("Invalid Format")
     }
   }
-  logOut(){
+  logOut() {
+    window.localStorage.removeItem("database")
+    window.localStorage.removeItem("token")
     window.localStorage.removeItem("currentUser")
     window.localStorage.removeItem("currentAcno")
+    alert("You have successfully logged out.")
     this.rt.navigateByUrl("")
   }
 
-  deleteParent(){
-    this.acno=JSON.parse(localStorage.getItem("currentAcno")||'')
-    this.username=JSON.parse(localStorage.getItem("currentUser")||'')
+  deleteParent() {
+    this.acno = JSON.parse(localStorage.getItem("currentAcno") || '')
+    this.username = JSON.parse(localStorage.getItem("currentUser") || '')
   }
 
-  cancel(){
-    this.acno="" // Removes the value of this.acno which causes ngif to fail
+  cancel() {
+    this.acno = "" // Removes the value of this.acno which causes ngif to fail
+  }
+
+  Delete(event: any) {
+    // alert(event)
+    this.ds.deleteacc(event).subscribe((result: any) => {
+      alert(result.message)
+      this.rt.navigateByUrl("")
+      this.logOut() // Calling logout function inside delete function
+    })
+
   }
 }
+

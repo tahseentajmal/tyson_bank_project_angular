@@ -14,13 +14,13 @@ export class LoginComponent {
   inputplaceholder = "Enter Account Number"
 
 
-  constructor(private router:Router,private ds:DataService,private fb:FormBuilder) {
+  constructor(private router: Router, private ds: DataService, private fb: FormBuilder) {
 
   }
 
-  loginForm=this.fb.group({
-    acno:['',[Validators.required,Validators.pattern('[0-9]+')]],
-    pwd:['',[Validators.required,Validators.pattern('[0-9a-zA-Z]+')]]
+  loginForm = this.fb.group({
+    acno: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+    pwd: ['', [Validators.required, Validators.pattern('[0-9a-zA-Z]+')]]
   })
 
   ngOnInIt(): void {
@@ -32,59 +32,24 @@ export class LoginComponent {
     var acnum = this.loginForm.value.acno
     var password = this.loginForm.value.pwd
 
-    const result = this.ds.login(acnum,password)
-
-      if(this.loginForm.valid){
-
-        if(result){
-          alert("Login success")
-          this.router.navigateByUrl("dashboard")
-        }
-        else{
-          alert("Incorrect Credentials")
-        }
-      }
-      else{
-        alert("Incorrect Format")
-      }
-
-
-
-    // var userdetails = this.ds.userdetails
-    // if (acnum in userdetails) {
-    //   if (password === userdetails[acnum]["password"]) {
-    //     alert("Login Success")
-    //     this.router.navigateByUrl("dashboard") // first dependency inject router module , call navigateByUrl method with refrence
-    //   }
-    //   else {
-    //     alert("Incorrect Password")
-    //   }
-    // }
-    // else {
-    //   alert("Account number is incorrect")
-    // }
+    if (this.loginForm.valid) {
+      this.ds.login(acnum, password).subscribe((result: any) => {
+        // to save acno,uname,toke on client local storage
+        localStorage.setItem("currentUser", JSON.stringify(result.username))
+        localStorage.setItem("currentAcno", JSON.stringify(result.acno))
+        localStorage.setItem("token", JSON.stringify(result.token))
+        // function status
+        alert(result.message)
+        // redirection
+        this.router.navigateByUrl("dashboard")
+      },
+        result => {
+          alert(result.error.message)
+        })
+    }
+    else {
+      alert("Incorrect Format")
+    }
   }
-
-
-// login(ac:any,pw:any) {  // Using Template rendering variable #variable in html
-//     console.log(ac.value);
-//     console.log(pw.value);
-    
-    
-//     var acnum = ac.value
-//     var password = pw.value
-//     var userdetails = this.userdetails
-//     if (acnum in userdetails) {
-//       if (password === userdetails[acnum]["password"]) {
-//         alert("Login Success")
-//       }
-//       else {
-//         alert("Incorrect Password")
-//       }
-//     }
-//     else {
-//       alert("Account number is incorrect")
-//     }
-//   }
 }
 

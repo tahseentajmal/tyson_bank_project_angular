@@ -220,5 +220,54 @@ Angular Pipes
             to convert data into another Formatgbg  g
 
 
+API creation in angular
+=======================
+
+    HttpClientModule :- 
+                        Module used to create web api calls
+
+
+                        HttpClient - class inside the HttpClientModule
+
+            
+            folder      file      class     methods
+
+            package     module    class     method
+
+
+Asynchronous Code Handling in ts
+================================
+
+    javaScript  -- Promises
+    ------------
+                    - resolve  then()
+                    - reject   catch()
+
+
+    typeScript  -- Observables
+    ------------
+
+                    - resolve subscribe()
+                    - reject catch()
+
+
+Header Generation for Api request
+=================================
+
+        HttpHeaders  - class used to generate Header
+
+
+
+to run application on server
+*==========================*
+
+        ng build
+
+        npm i -g http-server
+
+        http-server to run
+
+
+
 
 
